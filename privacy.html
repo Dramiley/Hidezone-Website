@@ -286,8 +286,8 @@
         <h2>6. App Permissions and Choices</h2>
         <p>The app requests the following permissions for the described purposes:</p>
         <ul>
-            <li><strong>ACCESS_FINE_LOCATION &amp; ACCESS_BACKGROUND_LOCATION / iOS Location Always:</strong> Required to calculate your distance to zones, track active position during gameplay, and maintain live game balance even when the device is locked or the app is minimized during a match.</li>
-            <li><strong>INTERNET &amp; FOREGROUND_SERVICE:</strong> Required to maintain connection to Firebase servers and run the location service during live matches.</li>
+            <li><strong>ACCESS_FINE_LOCATION / iOS Location While Using the App:</strong> Required to calculate your distance to zones, track active position during gameplay, and maintain live game balance even when the device is locked or the app is minimized during a match. HideZone does not request background location ("Allow all the time").</li>
+            <li><strong>INTERNET, FOREGROUND_SERVICE &amp; FOREGROUND_SERVICE_LOCATION:</strong> Required to maintain connection to Firebase servers and run the location service during live matches. The service starts when a match starts, shows a notification while it runs, and stops when the match ends.</li>
             <li><strong>POST_NOTIFICATIONS:</strong> Required to alert you when game rounds start, zone shrink countdowns trigger, or ping reveals occur.</li>
             <li><strong>App Tracking Transparency:</strong> Requested on iOS for advertising purposes where applicable.
                 Denying tracking does not block core gameplay.</li>
