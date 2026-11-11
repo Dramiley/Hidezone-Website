@@ -279,6 +279,32 @@
             .version {
                 font-size: 1.2rem;
             }
+
+            /* One swipeable row instead of a growing block of chips: it
+               stays one line high however many versions are added. The
+               row runs to the card edges and fades out at the sides. */
+            .toc {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x proximity;
+                margin: 0 -16px 32px;
+                padding: 2px 16px;
+                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 32px), transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 32px), transparent 100%);
+            }
+
+            .toc::-webkit-scrollbar {
+                display: none;
+            }
+
+            .toc a {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                scroll-snap-align: start;
+            }
         }
     </style>
 </head>
