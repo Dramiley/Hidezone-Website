@@ -290,6 +290,8 @@
                 scrollbar-width: none;
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x proximity;
+                /* Snap to the padded edge, not the card's rounded border. */
+                scroll-padding-inline: 16px;
                 margin: 0 -16px 32px;
                 padding: 2px 16px;
                 -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 32px), transparent 100%);
