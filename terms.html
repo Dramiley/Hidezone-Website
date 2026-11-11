@@ -35,7 +35,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            /* Vertical scroll stays on: on small or landscape screens the
+               cards are taller than the viewport. */
+            overflow-x: hidden;
             position: relative;
         }
 
