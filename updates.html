@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="icon.png">
+    <title>Updates & Changelog - HideZone</title>
+    <meta name="description"
+        content="Every HideZone update: new game modes, features, balance changes and fixes, from the first release to today.">
+    <style>
+        :root {
+            --void: #000000;
+            --surface: #0A0A0A;
+            --surface-elevated: #141414;
+            --border: #1F1F1F;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --accent: #00FF88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --accent-glow: rgba(0, 255, 136, 0.15);
+            --amber: #FFB020;
+            --amber-dim: rgba(255, 176, 32, 0.10);
+            --font-family: 'Inter', -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 820px;
+            margin: 60px auto;
+            padding: 60px 40px;
+            background-color: var(--surface);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--mono);
+            color: var(--accent);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .intro {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+
+        .toc a {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-secondary);
+        }
+
+        .toc a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .era {
+            font-family: var(--mono);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 56px 0 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .release {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+            scroll-margin-top: 24px;
+        }
+
+        .release.upcoming {
+            border-color: rgba(255, 176, 32, 0.4);
+            background: var(--amber-dim);
+        }
+
+        .release-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .version {
+            font-family: var(--mono);
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .upcoming .version {
+            color: var(--amber);
+        }
+
+        .date {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-left: 8px;
+            vertical-align: middle;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .badge.testing {
+            border-color: var(--amber);
+            color: var(--amber);
+        }
+
+        .headline {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 8px 0 12px;
+        }
+
+        h3 {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 16px 0 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            list-style-type: square;
+        }
+
+        li::marker {
+            color: var(--accent);
+        }
+
+        strong {
+            color: var(--text-primary);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .note {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            margin: 0 10px;
+            color: var(--text-muted);
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 16px 12px;
+                padding: 28px 16px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .release {
+                padding: 18px 16px;
+            }
+
+            .version {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p class="label">// Updates &amp; Changelog</p>
+        <h1>What's New</h1>
+        <p class="intro">Every HideZone update in one place: new game modes, features, balance changes and fixes.
+            Newest first. Dates are App Store release dates where available.</p>
+
+        <nav class="toc" aria-label="Versions">
+            <a href="#v3-1-0">3.1</a>
+            <a href="#v3-0-1">3.0.1</a>
+            <a href="#v3-0-0">3.0.0</a>
+            <a href="#v2-10-0">2.10</a>
+            <a href="#v2-9-0">2.9</a>
+            <a href="#v2-8-0">2.8</a>
+            <a href="#v2-7-1">2.7</a>
+            <a href="#v2-6-0">2.6</a>
+            <a href="#v2-5-1">2.5</a>
+            <a href="#v2-4-1">2.4</a>
+            <a href="#v2-3-0">2.3</a>
+            <a href="#v2-2-1">2.2</a>
+            <a href="#v2-1-0">2.1</a>
+            <a href="#v2-0-6">2.0</a>
+            <a href="#v1-6-0">1.6</a>
+            <a href="#v1-5">1.5</a>
+            <a href="#v1-4">1.4</a>
+            <a href="#v1-3">1.3</a>
+            <a href="#v1-0">1.0 to 1.2</a>
+        </nav>
+
+        <p class="era">Version 3</p>
+
+        <!-- ───────────── 3.1.0 ───────────── -->
+        <section class="release" id="v3-1-0">
+            <div class="release-head">
+                <span class="version">3.1.0<span class="badge">Latest</span></span>
+                <span class="date">Nov 2026</span>
+            </div>
+            <p class="headline">Capture the Flag, secret roles, vague pings, Auto-Tag and Korean.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Capture the Flag mode.</strong> Two teams, one flag each on their own half of the arena.
+                    Teams place their flag on the map during the prepare time (or it spawns at a random spot). Walk up to the enemy
+                    flag to grab it and bring it home to score. Everyone can be tagged on the other team's half, the
+                    flag carrier everywhere. Tagged players walk back to their own flag to rejoin. First team to the
+                    capture target wins; on a tie when time runs out, the <strong>Golden Flag</strong> decides: the next
+                    capture wins.</li>
+                <li><strong>Vague pings</strong> (free, every ping mode). Pings can show a circle the player is
+                    somewhere inside instead of the exact spot, so good hiding spots matter again. Players who stay
+                    put keep the same circle, so it cannot be narrowed down by comparing pings.</li>
+                <li><strong>Auto-Tag</strong> as a third tag type next to Distance and PIN. Tag automatically when
+                    you get close enough (adjustable from 3 to 30 m), starting after the hiding phase.</li>
+                <li><strong>Secret roles</strong> (Pro) for Hide &amp; Seek, Zombie, Freeze Tag and Mr. X. Nobody
+                    knows their role at the start: everyone scatters during the hiding phase, then the roles are
+                    revealed and the hunt begins. The lobby shows one shared list.</li>
+                <li><strong>Korean</strong> is the tenth app language.</li>
+                <li><strong>Level rewards overview:</strong> tap "Next reward" in your stats to see every reward.</li>
+                <li><strong>Restore purchases</strong> in Settings, for using Pro on a second phone with the same
+                    store account.</li>
+                <li>New lobbies now start with the settings of your last game.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li><strong>Chase mode retired.</strong> Vague pings now bring its idea to every mode. You can
+                    rebuild it in Hide &amp; Seek with vague pings and a short ping interval.</li>
+                <li>Less battery use: the map only redraws when you actually move, and the game screen no longer
+                    refreshes every second while you stand still.</li>
+                <li>Smoother chat, especially while the map is open behind it.</li>
+                <li>Zombie with Auto-Tag: holding the cure heals the nearest zombie automatically, at twice the
+                    Auto-Tag range.</li>
+                <li>Two seekers tagging the same hider at once now count as one catch.</li>
+                <li>Capture the Flag: a flag placed in the last second of setup is no longer moved to a random
+                    spot.</li>
+                <li>Every lobby sends less data per update.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 3.0.1 ───────────── -->
+        <section class="release" id="v3-0-1">
+            <div class="release-head">
+                <span class="version">3.0.1</span>
+                <span class="date">Nov 9, 2026</span>
+            </div>
+            <p class="headline">Never get eliminated by the zone without noticing again.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Out-of-zone alert:</strong> your phone vibrates and shows a large warning with red screen
+                    edges as soon as you leave the zone, repeating while you stay outside. A notification with strong
+                    vibration also reaches you when the screen is locked. Can be switched off in your settings.</li>
+                <li><strong>Post-game map:</strong> see where everyone was when the game ended, with your own
+                    position live, so the group finds each other again. The host can set a meeting point, and
+                    everyone sees the distance to it.</li>
+                <li><strong>Feet and miles:</strong> a Metric / Imperial switch. US players start on imperial
+                    automatically. Zone sizes, distances, help texts and stats follow your choice.</li>
+                <li>Waiting seekers now see whether the game uses PIN tagging instead of a catch distance.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>No more "Allow all the time" location permission. Tracking still continues while the screen is
+                    locked during a match.</li>
+                <li>A distinct message when you are eliminated for staying outside the zone.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>The zone transition duration no longer jumps back to 20 seconds when reopening the settings.</li>
+                <li>Countdowns stay visible in languages with long labels (for example French).</li>
+                <li>Cleaner Android notification icon and more stable startup on devices without the consent
+                    plugin.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 3.0.0 ───────────── -->
+        <section class="release" id="v3-0-0">
+            <div class="release-head">
+                <span class="version">3.0.0</span>
+                <span class="date">Nov 1, 2026</span>
+            </div>
+            <p class="headline">Bomb Tag, custom play areas and a new economy.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Bomb Tag mode:</strong> one player holds a ticking bomb and must tag someone to pass it
+                    on. When the fuse runs out, the holder is out; the last player standing wins. Options for fuse
+                    length, a no-return lock, a hidden fuse (Pro) and automatic passing by proximity (Pro).</li>
+                <li><strong>Custom play areas:</strong> draw the playground on the map with up to 12 corners, for
+                    example to leave out roads or water. Each shrink stage is a smaller copy of your shape. Saved in
+                    presets and replays.</li>
+                <li><strong>Item selection:</strong> switch individual items off for your group (free).</li>
+                <li><strong>Fixed cash economy:</strong> everyone starts with the same credits and never gets more
+                    (free; changing the amount is Pro).</li>
+                <li><strong>Hidden-player notice:</strong> after a ping you see how many players a Ghost or
+                    Camouflage kept off the map, so a missing marker no longer looks like a bug.</li>
+                <li><strong>Turkish</strong> is now a full app language.</li>
+            </ul>
+            <h3>Balance</h3>
+            <ul>
+                <li>Seekers now earn credits per tag.</li>
+                <li>Zone and circle sizes are shown as diameters everywhere.</li>
+                <li>The smallest custom area is 5,000 m².</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Zombie distance tags and cures are now processed atomically, so two players can no longer
+                    act on the same target at once.</li>
+                <li>Shops and target lists close when your role changes (for example after being infected).</li>
+                <li>Replay videos frame the current zone, and many smaller stability fixes.</li>
+            </ul>
+        </section>
+
+        <p class="era">Version 2</p>
+
+        <!-- ───────────── 2.10.0 ───────────── -->
+        <section class="release" id="v2-10-0">
+            <div class="release-head">
+                <span class="version">2.10.0</span>
+                <span class="date">Oct 28, 2026</span>
+            </div>
+            <p class="headline">Spectators, Play Again and two new languages.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Italian and Polish</strong> added.</li>
+                <li><strong>Play Again</strong> keeps all game settings for the next round.</li>
+                <li>Anyone can join a running lobby as a <strong>spectator</strong>.</li>
+                <li><strong>Dynamic ping intervals:</strong> pings speed up towards the end of the round as the zone
+                    shrinks (Pro).</li>
+                <li>Optional <strong>focused pings</strong> in Assassin: only your target and your hunter are
+                    revealed.</li>
+                <li>Chase could be played with a shrinking arena zone.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Faster map rendering on older devices.</li>
+                <li>Ping timer and replay export fixes.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.9.0 ───────────── -->
+        <section class="release" id="v2-9-0">
+            <div class="release-head">
+                <span class="version">2.9.0</span>
+                <span class="date">Oct 22, 2026</span>
+            </div>
+            <p class="headline">Mr. X Hunt.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Mr. X Hunt mode:</strong> Mr. X sees the detectives live, the detectives see Mr. X only
+                    on pings. The zone never shrinks, so detectives have to surround and corner Mr. X.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Cleaner mode order and Arena settings.</li>
+                <li>Better GPS recovery after switching apps and faster map tile loading.</li>
+                <li>Replay recap video export fixes.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.8.0 ───────────── -->
+        <section class="release" id="v2-8-0">
+            <div class="release-head">
+                <span class="version">2.8.0</span>
+                <span class="date">Oct 10, 2026</span>
+            </div>
+            <p class="headline">Play without a clock.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>No time limit:</strong> the match runs until every hider is found; the HUD counts up and
+                    the zone still shrinks to its final size.</li>
+                <li>Chase got two tracking modes and optional runner names on zones.</li>
+                <li>Rewritten mode guides for all eight modes.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Reworked zone logic; overtime was removed.</li>
+                <li>Stability improvements.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.7.x ───────────── -->
+        <section class="release" id="v2-7-1">
+            <div class="release-head">
+                <span class="version">2.7.1 &amp; 2.7.2</span>
+                <span class="date">Sep 27, 2026</span>
+            </div>
+            <p class="headline">Share your match as a video.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Video recaps:</strong> export a fast-forward replay of a match in 15, 30 or 60 seconds
+                    and share it.</li>
+                <li>Player names on radar pings (Pro).</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Faster lobby reconnection on mobile data and reliability fixes.</li>
+                <li>2.7.2 updated the links to the website and legal pages.</li>
+            </ul>
+        </section>
+
+        <section class="release" id="v2-7-0">
+            <div class="release-head">
+                <span class="version">2.7.0</span>
+                <span class="date">Sep 11, 2026</span>
+            </div>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Saved replays:</strong> games you host are saved on your phone to watch again later.</li>
+                <li>Your settings are reachable during the match and in team selection.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.6.0 ───────────── -->
+        <section class="release" id="v2-6-0">
+            <div class="release-head">
+                <span class="version">2.6.0</span>
+                <span class="date">Sep 4, 2026</span>
+            </div>
+            <p class="headline">Freeze Tag.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Freeze Tag mode:</strong> tagged hiders freeze in place; teammates thaw them by standing
+                    close for a few seconds. Seekers win when everyone is frozen at once.</li>
+            </ul>
+            <h3>Balance</h3>
+            <ul>
+                <li>Seeker item cooldowns are shared by the whole team.</li>
+                <li>The first ping is guaranteed after the hiding phase.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Radar and ping synchronization fixes, HUD polish and an ad-related crash fix.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.5.x ───────────── -->
+        <section class="release" id="v2-5-1">
+            <div class="release-head">
+                <span class="version">2.5.0 &amp; 2.5.1</span>
+                <span class="date">Aug 28 &amp; 29, 2026</span>
+            </div>
+            <p class="headline">A faster, lighter backend.</p>
+            <h3>Changes</h3>
+            <ul>
+                <li>Reworked backend for better performance and less battery and data use.</li>
+                <li>Map tiles are cached on your phone, so maps load faster and work better with weak signal.</li>
+                <li>Host settings layout adjusted for phones with 3-button navigation.</li>
+            </ul>
+            <h3>Balance</h3>
+            <ul>
+                <li>Seeker items now have a cooldown.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.4.x ───────────── -->
+        <section class="release" id="v2-4-1">
+            <div class="release-head">
+                <span class="version">2.4.0 &amp; 2.4.1</span>
+                <span class="date">Aug 11, 2026</span>
+            </div>
+            <p class="headline">Assassin, airdrops and a new end screen.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Assassin mode:</strong> free for all; eliminate your secret target to inherit theirs.
+                    The last assassin standing wins.</li>
+                <li><strong>Airdrops:</strong> supply crates with extra credits land inside the zone (Pro
+                    setting).</li>
+                <li><strong>New post-game screen</strong> with stats, MVP and a Play Again button for the host.</li>
+                <li>Export and import your stats and level to move them to another phone.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>PIN tagging rebuilt from the ground up.</li>
+                <li>Minimum zone settings unlocked for everyone.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.3.0 ───────────── -->
+        <section class="release" id="v2-3-0">
+            <div class="release-head">
+                <span class="version">2.3.0</span>
+                <span class="date">Aug 6, 2026</span>
+            </div>
+            <h3>New</h3>
+            <ul>
+                <li>Chat after the game ends.</li>
+                <li>The host can kick inactive players during a game.</li>
+                <li><strong>Immediate First Ping</strong> setting: the first reveal fires right when the hiding phase
+                    ends.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Direction indicator alignment and several bug and crash fixes.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.2.x ───────────── -->
+        <section class="release" id="v2-2-1">
+            <div class="release-head">
+                <span class="version">2.2.0 &amp; 2.2.1</span>
+                <span class="date">Jul 28 &amp; Aug 4, 2026</span>
+            </div>
+            <p class="headline">Notifications and an ad-free lobby with Pro.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Game notifications:</strong> zone shrinks, being tagged, the end of the hiding phase,
+                    items used on you and chat, each switchable.</li>
+                <li>If the host has Pro, the whole lobby plays without ads.</li>
+            </ul>
+            <h3>Balance</h3>
+            <ul>
+                <li>The reveal interval can now be up to 30 minutes.</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Smoother animations and battery optimizations, plus crash and bug fixes.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.1.0 ───────────── -->
+        <section class="release" id="v2-1-0">
+            <div class="release-head">
+                <span class="version">2.1.0</span>
+                <span class="date">Jul 12, 2026</span>
+            </div>
+            <p class="headline">Presets and spectators for events.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Presets:</strong> save and load your favourite game settings (Pro).</li>
+                <li><strong>Spectator mode</strong> for event hosts, with the live map and chat.</li>
+            </ul>
+            <h3>Balance</h3>
+            <ul>
+                <li>Zombie: leaving the safe zone now infects you instantly.</li>
+                <li>Tag reach unlocked for everyone in free-for-all modes.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>PIN tagging fixes.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 2.0.x ───────────── -->
+        <section class="release" id="v2-0-6">
+            <div class="release-head">
+                <span class="version">2.0.2 to 2.0.6</span>
+                <span class="date">Jun 17 to 25, 2026</span>
+            </div>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Satellite map</strong> (2.0.5).</li>
+                <li><strong>PIN tagging:</strong> seekers enter the hider's 4-digit PIN instead of relying on GPS
+                    distance (2.0.2).</li>
+                <li><strong>Match replay</strong> (2.0.2).</li>
+                <li>Redesigned host settings (2.0.2).</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>False eliminations and battery drain fixed (2.0.2).</li>
+                <li>Pings now trigger for every player after a host timeout (2.0.4).</li>
+                <li>Ping cooldown sync, game mode settings not applying, and lobby creation on some phones
+                    (2.0.5, 2.0.6).</li>
+                <li>Crash and stability fixes throughout.</li>
+            </ul>
+        </section>
+
+        <section class="release" id="v2-0-1">
+            <div class="release-head">
+                <span class="version">2.0.0 &amp; 2.0.1</span>
+                <span class="date">Jun 12 &amp; 16, 2026</span>
+            </div>
+            <p class="headline">HideZone 2: levels, Meteor Escape and a new look.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Levels:</strong> earn XP every game and unlock bonus starting credits.</li>
+                <li><strong>Meteor Escape mode:</strong> no seekers, the sky is the enemy. Dodge growing meteor
+                    waves; the last survivor wins.</li>
+                <li><strong>Hider shop:</strong> hiders can buy items during the game too.</li>
+                <li><strong>French</strong> added.</li>
+                <li>Complete visual overhaul and improved tutorials.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Murder Mystery fixes, and the mode stays free.</li>
+                <li>Game mode selection fix.</li>
+            </ul>
+        </section>
+
+        <p class="era">Version 1</p>
+
+        <!-- ───────────── 1.6.0 ───────────── -->
+        <section class="release" id="v1-6-0">
+            <div class="release-head">
+                <span class="version">1.5.6 &amp; 1.6.0</span>
+                <span class="date">Jun 3 &amp; 11, 2026</span>
+            </div>
+            <p class="headline">Murder Mystery (Beta).</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Murder Mystery mode</strong> (Beta, free for everyone): a hidden murderer hunts the
+                    survivors, who complete GPS tasks to unlock a weapon, report bodies with a 50 m radar and fight
+                    back.</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 1.5.x ───────────── -->
+        <section class="release" id="v1-5">
+            <div class="release-head">
+                <span class="version">1.5.0 to 1.5.5</span>
+                <span class="date">Apr 26 to May 20, 2026</span>
+            </div>
+            <p class="headline">Sardines and Chinese.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Sardines mode</strong> (1.5.0): reverse hide and seek. One player hides, everyone else
+                    searches and joins the hideout once found.</li>
+                <li><strong>Chinese</strong> added (1.5.1).</li>
+                <li>Ad personalization choice (1.5.0).</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Longer maximum game length (1.5.3).</li>
+                <li>Reworked host menu with scrollable lists (1.5.3).</li>
+                <li>Old lobbies are now cleaned up automatically on the server (1.5.0).</li>
+                <li>Russian and Chinese translation fixes (1.5.4).</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 1.4.x ───────────── -->
+        <section class="release" id="v1-4">
+            <div class="release-head">
+                <span class="version">1.4.0 to 1.4.4</span>
+                <span class="date">Apr 7 to 19, 2026</span>
+            </div>
+            <p class="headline">Chase and the direction indicator.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Chase mode</strong> (1.4.0): runners flee, chasers only see a vague search area around
+                    each runner. Retired in the next update in favor of vague pings in every mode.</li>
+                <li><strong>Direction indicator:</strong> a compass cone on your own marker shows where you are
+                    looking (1.4.3).</li>
+                <li>Adjustable "out of zone" time before elimination (1.4.3).</li>
+                <li>A clear message and a way out when the host disconnects (1.4.3).</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Zombie mode fixes (1.4.2).</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 1.3.x ───────────── -->
+        <section class="release" id="v1-3">
+            <div class="release-head">
+                <span class="version">1.3.0 to 1.3.9</span>
+                <span class="date">Feb 18 to Apr 6, 2026</span>
+            </div>
+            <p class="headline">Light mode, iPhone and Russian.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Light theme</strong> next to the dark theme (1.3.0).</li>
+                <li><strong>iPhone</strong> preparation and release, with crossplay between Android and iOS
+                    (1.3.4 to 1.4.0).</li>
+                <li><strong>Russian</strong> added (1.3.5).</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Reworked lobbies and ad behavior (1.3.0).</li>
+            </ul>
+        </section>
+
+        <!-- ───────────── 1.0 to 1.2 ───────────── -->
+        <section class="release" id="v1-0">
+            <div class="release-head">
+                <span class="version">1.0.0 to 1.2.7</span>
+                <span class="date">Jan 21 to Feb 14, 2026</span>
+            </div>
+            <p class="headline">The first HideZone.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>1.0:</strong> real-world hide and seek with live GPS. A host creates a zone, friends
+                    join with the Zone ID, and a safe zone shrinks over time. Periodic pings reveal hiders,
+                    seekers tag by distance, and the first items, lobby chat, reconnecting and host transfer were
+                    there from day one. HideZone Pro for hosts.</li>
+                <li><strong>Zombie mode</strong> and a <strong>language switch</strong> with German and Spanish
+                    (1.1.0).</li>
+                <li>Type exact values into host settings instead of only using sliders (1.2.6).</li>
+            </ul>
+            <h3>Changes</h3>
+            <ul>
+                <li>Better GPS accuracy and performance (1.2.x).</li>
+                <li>Reworked rejoining and automatic removal of abandoned lobbies (1.2.5).</li>
+                <li>Improved security and a clear location disclosure (1.2.6, 1.2.7).</li>
+            </ul>
+        </section>
+
+        <p class="note">Missing something or found a bug? Send feedback from the app's settings or
+            <a href="support.html">contact support</a>.</p>
+
+        <footer class="footer">
+            &copy; 2026 HideZone. All rights reserved. <br><br>
+            <a href="index.html">HOME</a> |
+            <a href="updates.html">UPDATES</a> |
+            <a href="terms.html">LEGAL OVERVIEW</a> |
+            <a href="support.html">SUPPORT</a> |
+            <a href="privacy.html">PRIVACY</a>
+        </footer>
+    </div>
+</body>
+
+</html>
