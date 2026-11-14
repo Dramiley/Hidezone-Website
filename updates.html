@@ -319,6 +319,7 @@
             Newest first. Dates are App Store release dates where available.</p>
 
         <nav class="toc" aria-label="Versions">
+            <a href="#v3-2-0">3.2</a>
             <a href="#v3-1-0">3.1</a>
             <a href="#v3-0-1">3.0.1</a>
             <a href="#v3-0-0">3.0.0</a>
@@ -342,10 +343,56 @@
 
         <p class="era">Version 3</p>
 
+        <!-- ───────────── 3.2.0 ───────────── -->
+        <section class="release" id="v3-2-0">
+            <div class="release-head">
+                <span class="version">3.2.0<span class="badge">Latest</span></span>
+                <span class="date">Nov 2026</span>
+            </div>
+            <p class="headline">The battery update: up to 94% less graphics work while you hide, and a map more than
+                twice as smooth.</p>
+            <h3>New</h3>
+            <ul>
+                <li><strong>Way less battery drain.</strong> While you wait or hide, the game now rests instead of
+                    redrawing the screen nonstop. On our test phone the graphics chip went from busy 89% of the time
+                    to 5%: about 94% less work, and it used to redraw the screen 60 times a second, now about twice.
+                    </li>
+                <li><strong>Battery saver</strong> in the settings, for long games on older phones. It goes a step
+                    further: a simpler map, no idle animations and a calmer direction cone. Your location and
+                    everything the other players see stay exactly the same.</li>
+                <li><strong>"I was caught"</strong> in the in-game settings. If a seeker reaches you but the tag
+                    does not register (weak GPS, indoors), report it yourself and it counts as a normal catch.</li>
+            </ul>
+            <h3>Better</h3>
+            <ul>
+                <li><strong>Smoother map:</strong> zooming and scrolling with street names on runs more than twice
+                    as smooth (11 to 25 frames per second on our test phone). Street names step aside while you move
+                    and come back when you stop.</li>
+                <li><strong>Zombie:</strong> when a survivor cures a zombie at the same moment the zombie tags
+                    someone, the cure wins.</li>
+                <li><strong>Assassin:</strong> focused pings are now on by default. Turn them off for a harder
+                    game: you see every player, but your target and your hunter are no longer marked.</li>
+                <li>Tags, PIN tags and cures no longer fail in big lobbies.</li>
+                <li>Items that cannot work right now (no target, no GPS) tell you why and cost nothing, and buying
+                    two items quickly costs both correctly.</li>
+                <li>Cleaner, more solid game panels that are easier to read over the satellite map.</li>
+                <li>Sharing your result now says what you did, like how long you stayed hidden, how many players
+                    you caught or how far you walked.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li>Meteor and airdrop settings changed in the lobby now reach every player.</li>
+                <li>Your walked distance no longer grows while your phone lies still.</li>
+                <li>The zone transition duration no longer jumps back to 20 seconds after loading a preset.
+                    Presets saved before this update keep 20 seconds until you save them again.</li>
+                <li>Several crashes and smaller bugs fixed.</li>
+            </ul>
+        </section>
+
         <!-- ───────────── 3.1.0 ───────────── -->
         <section class="release" id="v3-1-0">
             <div class="release-head">
-                <span class="version">3.1.0<span class="badge">Latest</span></span>
+                <span class="version">3.1.0</span>
                 <span class="date">Nov 2026</span>
             </div>
             <p class="headline">Capture the Flag, secret roles, Replay 2.0, a new end screen, vague pings and Auto-Tag.</p>
