@@ -319,6 +319,7 @@
             Newest first. Dates are App Store release dates where available.</p>
 
         <nav class="toc" aria-label="Versions">
+            <a href="#v3-3-0">3.3</a>
             <a href="#v3-2-0">3.2</a>
             <a href="#v3-1-0">3.1</a>
             <a href="#v3-0-1">3.0.1</a>
@@ -343,10 +344,55 @@
 
         <p class="era">Version 3</p>
 
+        <!-- ───────────── 3.3.0 ───────────── -->
+        <section class="release" id="v3-3-0">
+            <div class="release-head">
+                <span class="version">3.3.0<span class="badge">Latest</span></span>
+                <span class="date">Nov 2026</span>
+            </div>
+            <p class="headline">The item update: six new items, a fairer Auto-Tag and pings that stay live all game.
+            </p>
+            <h3>New items</h3>
+            <ul>
+                <li><strong>Freeze</strong> (hider, 200): every seeker freezes where they stand for 20 seconds and
+                    cannot tag. Walking more than 20 m away pauses their timer until they come back.</li>
+                <li><strong>Undercover</strong> (hider, 150): for 90 seconds the seekers see you as one of their own,
+                    new pings leave you out, and you see the seekers live.</li>
+                <li><strong>Smoke Bomb</strong> (hider, 70): the next ping shows you only as a circle.</li>
+                <li><strong>Gut Feeling</strong> (hider, 120): your phone buzzes when a seeker comes within 100 m and
+                    shows you who and how far, even in your pocket.</li>
+                <li><strong>Nuke</strong> (seeker, 200): place it, and 30 seconds later every hider within 30 m is
+                    out. Hiders inside get a warning and a notification, so run.</li>
+                <li><strong>Track</strong> (seeker, 120): shows where the nearest hider walked one to two minutes
+                    ago. The direction, not the spot. That hider gets a warning.</li>
+            </ul>
+            <h3>Better</h3>
+            <ul>
+                <li><strong>Auto-Tag asks first:</strong> a caught hider gets 20 seconds to confirm "I was tagged" or
+                    say "That was a mistake". No answer counts as caught. Auto-Tag now needs 3 seconds in range
+                    (5 to 30 m) and waits while GPS is inaccurate. Tapping Tag works as always.</li>
+                <li><strong>Zone Shield</strong> holds 30 seconds and only counts down while you are outside the
+                    zone.</li>
+                <li><strong>Zone Mover</strong> can no longer move the zone in the last 2 minutes before it
+                    shrinks; during a shrink it moves the next zone.</li>
+                <li>Countdowns for the zone and pings show minutes and seconds.</li>
+                <li>The shop centers a lone last item and hints when there is more below.</li>
+                <li>The lobby asks for precise location when your phone only shares an approximate one.</li>
+            </ul>
+            <h3>Fixes</h3>
+            <ul>
+                <li><strong>Pings no longer stop halfway through a game.</strong> After a connection hiccup your
+                    phone could keep old positions until the end; it now reconnects on its own.</li>
+                <li>Android: when GPS gets stuck, the game restarts it and tells you if the signal is lost.</li>
+                <li>After reopening the app you no longer see an older ping than the latest one.</li>
+                <li>Fixed a crash with Play Again.</li>
+            </ul>
+        </section>
+
         <!-- ───────────── 3.2.0 ───────────── -->
         <section class="release" id="v3-2-0">
             <div class="release-head">
-                <span class="version">3.2.0<span class="badge">Latest</span></span>
+                <span class="version">3.2.0</span>
                 <span class="date">Nov 2026</span>
             </div>
             <p class="headline">The battery update: up to 94% less graphics work while you hide, and a map more than
